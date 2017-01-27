@@ -9,7 +9,7 @@ class AuthCheckMiddleware {
   authCheck(app) {
     return function(req, res, next) {
       if(app.proxy) {
-        app.proxy.apiBindingForServiceType("SecurityService").then((service) => {
+        app.proxy.apiForServiceType("SecurityService").then((service) => {
           service.api.sercurity.check({access_token: "111111"}, (validity) => {
             if(validity.isValid === true) {
               next();
