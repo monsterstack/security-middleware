@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "core-server": "https://github.com/monsterstack/core-server#development"
-  }
+  },
   "author": "",
   "license": "ISC"
 }
