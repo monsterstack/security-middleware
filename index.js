@@ -1,12 +1,11 @@
 'use strict';
 
 class AuthCheckMiddleware {
-  constructor(proxy) {
-    this.proxy = proxy;
+  constructor() {
   }
 
 
-  authCheck() {
+  authCheck(app) {
     return function(req, res, next) {
       next();
     }
