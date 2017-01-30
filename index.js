@@ -23,7 +23,7 @@ class AuthCheckMiddleware {
       let accessToken = req.token; // Get from Authorization Header;
 
       // fast-pass
-      let fastPass = req.fastPass;
+      let fastPass = req.headers['x-fast-pass'];
 
       if(fastPass) {
         next();
