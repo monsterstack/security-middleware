@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "core-server": "https://github.com/monsterstack/core-server#development",
     "http-status": "^1.0.0"
   },
   "author": "",
