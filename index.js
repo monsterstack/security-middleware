@@ -2,6 +2,7 @@
 const HttpStatus = require('http-status');
 
 const messageCatalog = require('./messageCatalog');
+const KEY = 'fastPass';
 
 class AuthCheckMiddleware {
   constructor(app) {
@@ -11,7 +12,7 @@ class AuthCheckMiddleware {
   fastPass() {
     return function(req, res, next) {
       let fastPass = req.headers['x-fast-pass'];
-      req.fastPass = fastPass;
+      req[KEY] = fastPass;
       next();
     }
   }
