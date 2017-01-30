@@ -23,7 +23,8 @@ class AuthCheckMiddleware {
           }, (err) => {
             if(err.status === HttpStatus.NOT_FOUND) {
               res.status(HttpStatus.UNAUTHORIZED).send({ errorMessage: "Unauthorized for BEARER, Matching Access Token Not Found" });
-            } else if(err.status === HttpStatus.BAD_REQUEST).send({ errorMessage: "Bad Request" });
+            } else if(err.status === HttpStatus.BAD_REQUEST) {
+              res.status(err.status).send({ errorMessage: "Bad Request" });
             } else {
               res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({errorMessage: "Internal Server Error"});
             }
