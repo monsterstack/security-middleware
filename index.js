@@ -11,7 +11,9 @@ class AuthCheckMiddleware {
     let self = this;
     return function(req, res, next) {
       let accessToken = req.token; // Get from Authorization Header;
-      if(self.app.proxy) {
+      if(accessToken === undefined) {
+        res.status(HttpStatus.BAD_REQUEST).send({errorMessage: "Bad Request, Missing access-token"});
+      } else if(self.app.proxy) {
         self.app.proxy.apiForServiceType("SecurityService").then((service) => {
           service.api.tokens.check({'access-token': accessToken}, (validity) => {
             if(validity.valid === true) {
