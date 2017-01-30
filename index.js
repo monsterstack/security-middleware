@@ -12,7 +12,7 @@ class AuthCheckMiddleware {
   fastPass() {
     return function(req, res, next) {
       let fastPass = req.headers['x-fast-pass'];
-      req[KEY] = fastPass;
+      //req[KEY] = fastPass;
       next();
     }
   }
