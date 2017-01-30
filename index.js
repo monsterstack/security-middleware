@@ -1,6 +1,5 @@
 'use strict';
 const HttpStatus = require('http-status');
-const ServiceError = require('core-server').ServiceError;
 
 class AuthCheckMiddleware {
   constructor(app) {
@@ -19,10 +18,10 @@ class AuthCheckMiddleware {
               next();
             } else {
               // 403 - Forbidden
-              new ServiceError(HttpStatus.FORBIDDEN, "Forbidden Access").writeResponse(res);
+              res.status(HttpStatus.FORBIDDEN).send({errorMessage: "Forbidden Access"});
             }
           }, (err) => {
-            new ServiceError(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error").writeResponse(res);
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({errorMessage: "Internal Server Error"});
           });
         }).catch((err) => {
           // 500 - Internal Service Error
