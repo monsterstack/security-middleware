@@ -1,5 +1,6 @@
 'use strict';
 const HttpStatus = require('http-status');
+const ServiceError = require('core-server').ServiceError;
 
 class AuthCheckMiddleware {
   constructor(app) {
