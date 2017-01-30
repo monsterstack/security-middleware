@@ -12,7 +12,7 @@ class AuthCheckMiddleware {
   fastPass() {
     return function(req, res, next) {
       let fastPass = req.headers['x-fast-pass'];
-      //req[KEY] = fastPass;
+      req[KEY] = fastPass;
       next();
     }
   }
@@ -23,11 +23,11 @@ class AuthCheckMiddleware {
       let accessToken = req.token; // Get from Authorization Header;
 
       // fast-pass
-      let fastPass = req.headers['x-fast-pass'];
+      let fastPass = req.fastPass;
 
       if(fastPass) {
         next();
-      } if(accessToken === undefined) {
+      } else if(accessToken === undefined) {
         res.status(HttpStatus.BAD_REQUEST).send({errorMessage: messageCatalog.BAD_REQUEST_ACCESS_TOKEN.message});
       } else if(self.app.proxy) {
           self.app.proxy.apiForServiceType("SecurityService").then((service) => {
