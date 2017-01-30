@@ -17,7 +17,7 @@ class AuthCheckMiddleware {
           self.app.proxy.apiForServiceType("SecurityService").then((service) => {
           if(service) {
             service.api.tokens.check({'access-token': accessToken}, (validity) => {
-              if(validity.valid === true) {
+              if(validity.obj.valid === true) {
                 next();
               } else {
                 // 403 - Forbidden
