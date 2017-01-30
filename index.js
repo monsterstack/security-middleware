@@ -13,7 +13,7 @@ class AuthCheckMiddleware {
       let accessToken = req.token; // Get from Authorization Header;
       if(self.app.proxy) {
         self.app.proxy.apiForServiceType("SecurityService").then((service) => {
-          service.api.tokens.check({'access-token': "111111"}, (validity) => {
+          service.api.tokens.check({'access-token': accessToken}, (validity) => {
             if(validity.valid === true) {
               next();
             } else {
