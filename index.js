@@ -21,8 +21,11 @@ class AuthCheckMiddleware {
               res.status(HttpStatus.FORBIDDEN).send({errorMessage: "Forbidden Access"});
             }
           }, (err) => {
-            console.log(err);
-            res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({errorMessage: "Internal Server Error"});
+            if(err.status === HttpStatus.NOT_FOUND) {
+              res.status(HttpStatus.UNAUTHORIZED).send("Access Token Not Found");
+            } else {
+              res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({errorMessage: "Internal Server Error"});
+            }
           });
         }).catch((err) => {
           // 500 - Internal Service Error
