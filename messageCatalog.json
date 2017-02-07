@@ -13,5 +13,8 @@
   },
   "BAD_REQUEST": {
     "message": "Bad Request. Missing access-token"
+  },
+  "BAD_REQUEST_ACCESS_TOKEN": {
+    "message": "Bad Request. Missing access-token"
   }
 }
