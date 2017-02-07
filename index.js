@@ -47,6 +47,7 @@ class AuthCheckMiddleware {
               } else if(err.status === HttpStatus.BAD_REQUEST) {
                 res.status(err.status).send({ errorMessage: messageCatalog.BAD_REQUEST.message });
               } else {
+                console.log(err);
                 res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({errorMessage: messageCatalog.INTERNAL_SERVER_ERROR.message});
               }
             });
