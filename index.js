@@ -32,6 +32,7 @@ class AuthCheckMiddleware {
       } else if(self.app.proxy) {
           self.app.proxy.apiForServiceType("SecurityService").then((service) => {
           if(service) {
+            console.log(`Checking token ${accessToken}`);
             service.api.tokens.check({'access-token': accessToken}, (validity) => {
               console.log(validity);
               if(validity.obj.valid === true) {
