@@ -3,6 +3,8 @@ const HttpStatus = require('http-status');
 
 const messageCatalog = require('./messageCatalog');
 const KEY = 'fastPass';
+const TENANT_NAME_KEY = "TenantName";
+const BOOTSTRAP_TENANT_NAME = "CDSPTenant";
 
 class AuthCheckMiddleware {
   constructor(app) {
@@ -26,6 +28,7 @@ class AuthCheckMiddleware {
       let fastPass = req.fastPass;
 
       if(fastPass) {
+        req.headers[TENANT_NAME_KEY] = BOOTSTRAP_TENANT_NAME;
         next();
       } else if(accessToken === undefined) {
         res.status(HttpStatus.BAD_REQUEST).send({errorMessage: messageCatalog.BAD_REQUEST_ACCESS_TOKEN.message});
@@ -36,6 +39,7 @@ class AuthCheckMiddleware {
             service.api.tokens.check({'access-token': accessToken}, (validity) => {
               console.log(validity);
               if(validity.obj.valid === true) {
+                req.headers[TENANT_NAME_KEY] = validity.obj.tenantName;
                 next();
               } else {
                 // 403 - Forbidden
