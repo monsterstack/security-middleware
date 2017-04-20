@@ -1,7 +1,7 @@
 'use strict';
 
 const HttpStatus = require('http-status');
-
+const GetCurrentContext = require('app-context').GetCurrent;
 const messageCatalog = require('./messageCatalog');
 const KEY = 'fastPass';
 const TENANT_NAME_KEY = "TenantName";
@@ -43,6 +43,7 @@ class AuthCheckMiddleware {
               if(validity.obj.valid === true) {
                 // Forward the tenant name down the hill
                 req.headers[TENANT_NAME_KEY] = validity.obj.tenantName;
+                let context = GetCurrentContext().set('tenantName', validity.obj.tenantName);
                 next();
               } else {
                 // 403 - Forbidden
