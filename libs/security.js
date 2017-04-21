@@ -32,7 +32,7 @@ class AuthCheckMiddleware {
       if(fastPass) {
         // Forward the tenant name down the hill
         req.headers[TENANT_NAME_KEY] = BOOTSTRAP_TENANT_NAME;
-        context.set('tenantName', req.headers[TENANT_NAME_KEY]);
+        //context.set('tenantName', req.headers[TENANT_NAME_KEY]);
         next();
       } else if(accessToken === undefined) {
         res.status(HttpStatus.BAD_REQUEST).send({errorMessage: messageCatalog.BAD_REQUEST_ACCESS_TOKEN.message});
