@@ -24,7 +24,7 @@ class AuthCheckMiddleware {
     let self = this;
     return function(req, res, next) {
       let accessToken = req.token; // Get from Authorization Header;
-      let context = GetCurrentContext();
+      //let context = GetCurrentContext();
       //context.set('accessToken', accessToken);
       // fast-pass
       let fastPass = req.fastPass;
@@ -45,7 +45,7 @@ class AuthCheckMiddleware {
               if(validity.obj.valid === true) {
                 // Forward the tenant name down the hill
                 req.headers[TENANT_NAME_KEY] = validity.obj.tenantName;
-                let context = GetCurrentContext().set('tenantName', validity.obj.tenantName);
+                // GetCurrentContext().set('tenantName', validity.obj.tenantName);
                 next();
               } else {
                 // 403 - Forbidden
