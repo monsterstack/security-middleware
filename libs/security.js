@@ -25,7 +25,7 @@ class AuthCheckMiddleware {
     return function(req, res, next) {
       let accessToken = req.token; // Get from Authorization Header;
       let context = GetCurrentContext();
-      context.set('accessToken', accessToken);
+      //context.set('accessToken', accessToken);
       // fast-pass
       let fastPass = req.fastPass;
 
