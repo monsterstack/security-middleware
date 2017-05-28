@@ -24,8 +24,7 @@ class AuthCheckMiddleware {
     let self = this;
     return function(req, res, next) {
       let accessToken = req.token; // Get from Authorization Header;
-      let context = GetCurrentContext();
-      context.set('accessToken', accessToken);
+      
       // fast-pass
       let fastPass = req.fastPass;
 
@@ -37,6 +36,8 @@ class AuthCheckMiddleware {
       } else if(accessToken === undefined) {
         res.status(HttpStatus.BAD_REQUEST).send({errorMessage: messageCatalog.BAD_REQUEST_ACCESS_TOKEN.message});
       } else if(self.app.proxy) {
+          let context = GetCurrentContext();
+          context.set('accessToken', accessToken);
           self.app.proxy.apiForServiceType("SecurityService").then((service) => {
           if(service) {
             console.log(`Checking token ${accessToken}`);
